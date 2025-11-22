@@ -9,7 +9,11 @@ Advanced Trading Data Visualization Platform built with Angular 18+ and Chart.js
 
 ## Features
 
-- 📊 **Real-time Chart Visualization** - Interactive price, open interest, and volume charts
+- 📊 **TradingView-style Candlestick Charts** - Professional OHLC visualization with bodies and wicks
+- 🖱️ **Advanced Zoom & Pan** - Mouse wheel zoom, drag to pan, +/- buttons, fit-to-data
+- 📏 **Visual Measurement Tool** - Click two points to measure price change %, time period, and candle count
+- ⏰ **Time-based X-axis** - Accurate timestamp display (HH:mm format)
+- 💡 **Detailed Tooltips** - Hover over candles to see OHLC values with percentage change
 - 📈 **Multiple Scenario Support** - Load up to 6 trading scenarios simultaneously
 - 🎨 **Modern Dark Theme** - Beautiful gradient UI with Tailwind CSS
 - 📱 **Responsive Design** - Works perfectly on desktop, tablet, and mobile
@@ -21,10 +25,15 @@ Advanced Trading Data Visualization Platform built with Angular 18+ and Chart.js
 
 - **Framework**: Angular 18+ (Standalone Components)
 - **Charts**: Chart.js 4.x with ng2-charts
+- **Financial Charts**: chartjs-chart-financial (Candlestick charts)
+- **Chart Zoom**: chartjs-plugin-zoom (TradingView-style zoom & pan)
+- **Time Adapter**: chartjs-adapter-date-fns (Time-based X-axis)
+- **Date Library**: date-fns 4.x (Date formatting)
 - **Styling**: Tailwind CSS 3.x
 - **Language**: TypeScript (Strict Mode)
 - **Package Manager**: pnpm
 - **State Management**: RxJS BehaviorSubject
+- **Touch Support**: HammerJS (Mobile pinch-to-zoom)
 
 ## Project Structure
 
@@ -191,12 +200,36 @@ Each scenario displays key metrics:
 - **Volatility** - Market volatility indicator (<2.5% = low)
 - **Average Volume** - Trading volume statistics
 
-### Interactive Charts
+### Interactive Charts (TradingView-style)
 
-Three synchronized charts per scenario:
-1. **Price Chart** (Green) - Shows closing prices over time
-2. **Open Interest Chart** (Orange) - Displays OI trends
-3. **Volume Chart** (Bars) - Green for price increase, red for decrease
+Three professional trading charts per scenario with full TradingView functionality:
+
+1. **Price Chart (Candlestick)** - Professional OHLC visualization
+   - Green/Red candlestick bodies with wicks for bullish/bearish moves
+   - Hover to see Open, High, Low, Close values with percentage change
+   - Time-based X-axis (HH:mm format)
+
+2. **Open Interest Chart (Candlestick)** - OI OHLC data
+   - Orange/Red candlesticks for OI changes
+   - Detailed tooltip with all OHLC values
+   - Synchronized zoom across all charts
+
+3. **Volume Chart (Bars)** - Trading volume visualization
+   - Green bars for price increase, red for decrease
+   - Time-synchronized with price charts
+   - Detailed volume information on hover
+
+**Chart Controls (TradingView-style):**
+- 🖱️ **Mouse wheel** - Zoom in/out (smooth, precise control)
+- 👆 **Click & drag** - Pan left/right across time
+- ➕ **+ button** - Zoom in
+- ➖ **- button** - Zoom out
+- 🔄 **Fit button** - Reset zoom to fit all data
+- 📏 **Measure tool** - Click to activate, then click two points to measure:
+  - Percentage change between points
+  - Time period (candle count)
+  - Visual line with markers on chart
+- 📱 **Pinch-to-zoom** on mobile devices
 
 ### Data Optimization
 

@@ -1,37 +1,180 @@
 <div class="charts-container">
+  <!-- Control Instructions -->
+  <div class="control-instructions">
+    <div class="instructions-row">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <div class="instructions-content">
+        <span class="instruction-item"><strong>Колёсико мыши</strong> = Зум</span>
+        <span class="instruction-item"><strong>Перетащить</strong> = Панорамирование</span>
+        <span class="instruction-item"><strong>Наведение</strong> = OHLC данные</span>
+      </div>
+      <div class="zoom-controls">
+        <button class="zoom-button" (click)="zoomIn()" title="Увеличить">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+        </button>
+        <button class="zoom-button" (click)="zoomOut()" title="Уменьшить">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+          </svg>
+        </button>
+        <button class="zoom-button" (click)="resetZoom()" title="Сбросить зум">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+          </svg>
+        </button>
+      </div>
+      <button
+        class="reset-button"
+        [class.measurement-active]="measurementMode"
+        (click)="toggleMeasurement()"
+        title="Режим измерения">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+        </svg>
+        {{ measurementMode ? 'Выкл. измерение' : 'Измерить' }}
+      </button>
+      <button
+        *ngIf="measurementStart || measurementEnd"
+        class="reset-button"
+        (click)="clearMeasurement()"
+        title="Очистить измерение">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        Очистить
+      </button>
+    </div>
+  </div>
+
+  <!-- Measurement Results Display -->
+  <div *ngIf="getMeasurementData()" class="measurement-results">
+    <div class="measurement-title">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="measurement-icon">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+      Результаты измерения
+    </div>
+    <div class="measurement-stats">
+      <div class="measurement-stat">
+        <span class="stat-label">Изменение:</span>
+        <span class="stat-value" [class.positive]="getMeasurementData()!.percentChange >= 0" [class.negative]="getMeasurementData()!.percentChange < 0">
+          {{ getMeasurementData()!.percentChange >= 0 ? '+' : '' }}{{ getMeasurementData()!.percentChange.toFixed(2) }}%
+        </span>
+      </div>
+      <div class="measurement-stat">
+        <span class="stat-label">Период:</span>
+        <span class="stat-value">{{ getMeasurementData()!.timeChange }}</span>
+      </div>
+      <div class="measurement-stat">
+        <span class="stat-label">Свечей:</span>
+        <span class="stat-value">{{ getMeasurementData()!.points }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Price Candlestick Chart -->
   <div class="chart-wrapper">
-    <h4 class="chart-title">Price Chart</h4>
-    <div class="chart-canvas">
+    <h4 class="chart-title">
+      <svg class="chart-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+      </svg>
+      Price Chart (Candlestick)
+    </h4>
+    <div class="chart-canvas" [class.measurement-mode]="measurementMode">
       <canvas
+        #priceChart="base-chart"
         baseChart
         [data]="priceChartData"
         [options]="priceChartOptions"
         [type]="priceChartType"
+        (click)="onChartClick($event, 'price')"
       ></canvas>
+      <!-- Measurement Line Overlay -->
+      <div class="measurement-overlay" *ngIf="measurementMode && currentMeasurementChart === 'price' && getMeasurementLine()">
+        <svg class="measurement-svg">
+          <line
+            [attr.x1]="getMeasurementLine()!.x1"
+            [attr.y1]="getMeasurementLine()!.y1"
+            [attr.x2]="getMeasurementLine()!.x2"
+            [attr.y2]="getMeasurementLine()!.y2"
+            class="measurement-line-svg"
+          />
+          <circle [attr.cx]="getMeasurementLine()!.x1" [attr.cy]="getMeasurementLine()!.y1" r="5" class="measurement-point" />
+          <circle [attr.cx]="getMeasurementLine()!.x2" [attr.cy]="getMeasurementLine()!.y2" r="5" class="measurement-point" />
+        </svg>
+      </div>
     </div>
   </div>
 
+  <!-- Open Interest Candlestick Chart -->
   <div class="chart-wrapper">
-    <h4 class="chart-title">Open Interest</h4>
-    <div class="chart-canvas">
+    <h4 class="chart-title">
+      <svg class="chart-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+      Open Interest (Candlestick)
+    </h4>
+    <div class="chart-canvas" [class.measurement-mode]="measurementMode">
       <canvas
+        #oiChart="base-chart"
         baseChart
         [data]="oiChartData"
         [options]="oiChartOptions"
         [type]="oiChartType"
+        (click)="onChartClick($event, 'oi')"
       ></canvas>
+      <!-- Measurement Line Overlay -->
+      <div class="measurement-overlay" *ngIf="measurementMode && currentMeasurementChart === 'oi' && getMeasurementLine()">
+        <svg class="measurement-svg">
+          <line
+            [attr.x1]="getMeasurementLine()!.x1"
+            [attr.y1]="getMeasurementLine()!.y1"
+            [attr.x2]="getMeasurementLine()!.x2"
+            [attr.y2]="getMeasurementLine()!.y2"
+            class="measurement-line-svg"
+          />
+          <circle [attr.cx]="getMeasurementLine()!.x1" [attr.cy]="getMeasurementLine()!.y1" r="5" class="measurement-point" />
+          <circle [attr.cx]="getMeasurementLine()!.x2" [attr.cy]="getMeasurementLine()!.y2" r="5" class="measurement-point" />
+        </svg>
+      </div>
     </div>
   </div>
 
+  <!-- Volume Bar Chart -->
   <div class="chart-wrapper">
-    <h4 class="chart-title">Volume</h4>
-    <div class="chart-canvas">
+    <h4 class="chart-title">
+      <svg class="chart-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+      Volume
+    </h4>
+    <div class="chart-canvas" [class.measurement-mode]="measurementMode">
       <canvas
+        #volumeChart="base-chart"
         baseChart
         [data]="volumeChartData"
         [options]="volumeChartOptions"
         [type]="volumeChartType"
+        (click)="onChartClick($event, 'volume')"
       ></canvas>
+      <!-- Measurement Line Overlay -->
+      <div class="measurement-overlay" *ngIf="measurementMode && currentMeasurementChart === 'volume' && getMeasurementLine()">
+        <svg class="measurement-svg">
+          <line
+            [attr.x1]="getMeasurementLine()!.x1"
+            [attr.y1]="getMeasurementLine()!.y1"
+            [attr.x2]="getMeasurementLine()!.x2"
+            [attr.y2]="getMeasurementLine()!.y2"
+            class="measurement-line-svg"
+          />
+          <circle [attr.cx]="getMeasurementLine()!.x1" [attr.cy]="getMeasurementLine()!.y1" r="5" class="measurement-point" />
+          <circle [attr.cx]="getMeasurementLine()!.x2" [attr.cy]="getMeasurementLine()!.y2" r="5" class="measurement-point" />
+        </svg>
+      </div>
     </div>
   </div>
 </div>

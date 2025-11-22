@@ -6,6 +6,14 @@ import { ScenarioCardComponent } from './components/scenario-card/scenario-card.
 import { ScenarioService } from './services/scenario.service';
 import { ScenarioData } from './models/scenario.model';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { Chart } from 'chart.js';
+import { CandlestickController, CandlestickElement } from 'chartjs-chart-financial';
+import zoomPlugin from 'chartjs-plugin-zoom';
+import 'chartjs-adapter-date-fns';
+import 'hammerjs';
+
+// Register financial chart and zoom plugins
+Chart.register(CandlestickController, CandlestickElement, zoomPlugin);
 
 @Component({
   selector: 'app-root',
