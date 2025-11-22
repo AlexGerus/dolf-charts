@@ -1,0 +1,51 @@
+<div class="app-container">
+  <header class="app-header">
+    <div class="header-content">
+      <h1 class="app-title">
+        <svg class="title-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+        DOLF Strategy Analytics
+      </h1>
+      <p class="app-subtitle">Advanced Trading Data Visualization</p>
+    </div>
+
+    <div class="header-actions" *ngIf="getScenariosCount() > 0">
+      <div class="scenario-counter">
+        <span class="counter-label">Scenarios:</span>
+        <span class="counter-value">{{ getScenariosCount() }}/6</span>
+      </div>
+      <button class="clear-button" (click)="clearAllScenarios()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+        Clear All
+      </button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <app-file-uploader (filesUploaded)="onFilesUploaded($event)"></app-file-uploader>
+
+    <div class="scenarios-grid" *ngIf="scenarios.length > 0">
+      <app-scenario-card
+        *ngFor="let scenario of scenarios; let i = index"
+        [scenarioData]="scenario"
+        [index]="i"
+        (removeScenario)="onRemoveScenario($event)"
+      ></app-scenario-card>
+    </div>
+
+    <div class="empty-state" *ngIf="scenarios.length === 0">
+      <svg class="empty-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+      </svg>
+      <h3 class="empty-title">No scenarios loaded</h3>
+      <p class="empty-description">Upload JSON files to visualize trading data</p>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>DOLF Strategy Analytics &copy; 2024 | Powered by Angular & Chart.js</p>
+  </footer>
+</div>

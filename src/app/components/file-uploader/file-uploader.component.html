@@ -1,0 +1,50 @@
+<div class="file-uploader-container">
+  <div
+    class="drop-zone"
+    [class.dragging]="isDragging"
+    [class.loading]="isLoading"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    <div class="drop-zone-content">
+      <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+      </svg>
+
+      <div *ngIf="!isLoading" class="upload-text">
+        <h3 class="upload-title">Drop JSON files here</h3>
+        <p class="upload-subtitle">or click to browse</p>
+        <p class="upload-hint">Maximum 6 files (JSON format)</p>
+      </div>
+
+      <div *ngIf="isLoading" class="loading-text">
+        <div class="spinner"></div>
+        <p>Processing files...</p>
+      </div>
+
+      <input
+        type="file"
+        class="file-input"
+        accept=".json"
+        multiple
+        (change)="onFileSelect($event)"
+        [disabled]="isLoading"
+      />
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message animate-slideUp">
+    <div class="error-content">
+      <svg class="error-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>{{ errorMessage }}</span>
+      <button class="error-close" (click)="clearError()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,114 @@
+.scenario-card {
+  background: rgba(30, 30, 46, 0.8);
+  border: 1px solid rgba(0, 255, 136, 0.1);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.scenario-card:hover {
+  border-color: rgba(0, 255, 136, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.2);
+  transform: translateY(-4px);
+}
+
+.scenario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.scenario-info {
+  flex: 1;
+}
+
+.scenario-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00ff88;
+  margin-bottom: 0.5rem;
+}
+
+.scenario-description {
+  font-size: 0.875rem;
+  color: #a0a0a0;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.scenario-symbol {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 255, 136, 0.1);
+  color: #00ff88;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.symbol-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.remove-button {
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.3);
+  color: #ff4444;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-button:hover {
+  background: rgba(255, 68, 68, 0.2);
+  border-color: #ff4444;
+  transform: scale(1.1);
+}
+
+.remove-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.scenario-content {
+  /* Content styling handled by child components */
+}
+
+@media (max-width: 768px) {
+  .scenario-card {
+    padding: 1rem;
+  }
+
+  .scenario-title {
+    font-size: 1.25rem;
+  }
+
+  .scenario-description {
+    font-size: 0.75rem;
+  }
+
+  .scenario-symbol {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  .remove-button {
+    padding: 0.375rem;
+  }
+
+  .remove-button svg {
+    width: 20px;
+    height: 20px;
+  }
+}

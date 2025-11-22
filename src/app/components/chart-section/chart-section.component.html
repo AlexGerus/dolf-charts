@@ -1,0 +1,37 @@
+<div class="charts-container">
+  <div class="chart-wrapper">
+    <h4 class="chart-title">Price Chart</h4>
+    <div class="chart-canvas">
+      <canvas
+        baseChart
+        [data]="priceChartData"
+        [options]="priceChartOptions"
+        [type]="priceChartType"
+      ></canvas>
+    </div>
+  </div>
+
+  <div class="chart-wrapper">
+    <h4 class="chart-title">Open Interest</h4>
+    <div class="chart-canvas">
+      <canvas
+        baseChart
+        [data]="oiChartData"
+        [options]="oiChartOptions"
+        [type]="oiChartType"
+      ></canvas>
+    </div>
+  </div>
+
+  <div class="chart-wrapper">
+    <h4 class="chart-title">Volume</h4>
+    <div class="chart-canvas">
+      <canvas
+        baseChart
+        [data]="volumeChartData"
+        [options]="volumeChartOptions"
+        [type]="volumeChartType"
+      ></canvas>
+    </div>
+  </div>
+</div>

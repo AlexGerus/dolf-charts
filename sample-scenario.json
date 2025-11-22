@@ -1,0 +1,200 @@
+{
+  "scenario": "Scenario 1: Deep Sleep",
+  "description": "Bitcoin entered a deep sleep phase with minimal volatility and low trading volume. Open Interest remained stable with slight correlation to price movements.",
+  "symbol": "BTCUSDT",
+  "candles": [
+    {
+      "timestamp": 1763809479802,
+      "timeFormatted": "0m",
+      "price": {
+        "open": 50000.0,
+        "high": 50100.0,
+        "low": 49900.0,
+        "close": 50000.0
+      },
+      "openInterest": {
+        "open": 1000000.0,
+        "high": 1001000.0,
+        "low": 999000.0,
+        "close": 1000000.0
+      },
+      "volume": 35000.0,
+      "turnover": 1750000000.0
+    },
+    {
+      "timestamp": 1763809539802,
+      "timeFormatted": "1m",
+      "price": {
+        "open": 50000.0,
+        "high": 50150.0,
+        "low": 49950.0,
+        "close": 50050.0
+      },
+      "openInterest": {
+        "open": 1000000.0,
+        "high": 1001500.0,
+        "low": 999500.0,
+        "close": 1000500.0
+      },
+      "volume": 36000.0,
+      "turnover": 1802500000.0
+    },
+    {
+      "timestamp": 1763809599802,
+      "timeFormatted": "2m",
+      "price": {
+        "open": 50050.0,
+        "high": 50200.0,
+        "low": 50000.0,
+        "close": 50100.0
+      },
+      "openInterest": {
+        "open": 1000500.0,
+        "high": 1002000.0,
+        "low": 1000000.0,
+        "close": 1001000.0
+      },
+      "volume": 38000.0,
+      "turnover": 1903800000.0
+    },
+    {
+      "timestamp": 1763809659802,
+      "timeFormatted": "3m",
+      "price": {
+        "open": 50100.0,
+        "high": 50250.0,
+        "low": 50050.0,
+        "close": 50150.0
+      },
+      "openInterest": {
+        "open": 1001000.0,
+        "high": 1002500.0,
+        "low": 1000500.0,
+        "close": 1001500.0
+      },
+      "volume": 40000.0,
+      "turnover": 2006000000.0
+    },
+    {
+      "timestamp": 1763809719802,
+      "timeFormatted": "4m",
+      "price": {
+        "open": 50150.0,
+        "high": 50300.0,
+        "low": 50100.0,
+        "close": 50200.0
+      },
+      "openInterest": {
+        "open": 1001500.0,
+        "high": 1003000.0,
+        "low": 1001000.0,
+        "close": 1002000.0
+      },
+      "volume": 42000.0,
+      "turnover": 2108400000.0
+    },
+    {
+      "timestamp": 1763809779802,
+      "timeFormatted": "5m",
+      "price": {
+        "open": 50200.0,
+        "high": 50350.0,
+        "low": 50150.0,
+        "close": 50250.0
+      },
+      "openInterest": {
+        "open": 1002000.0,
+        "high": 1003500.0,
+        "low": 1001500.0,
+        "close": 1002500.0
+      },
+      "volume": 45000.0,
+      "turnover": 2261250000.0
+    },
+    {
+      "timestamp": 1763809839802,
+      "timeFormatted": "6m",
+      "price": {
+        "open": 50250.0,
+        "high": 50400.0,
+        "low": 50200.0,
+        "close": 50300.0
+      },
+      "openInterest": {
+        "open": 1002500.0,
+        "high": 1004000.0,
+        "low": 1002000.0,
+        "close": 1003000.0
+      },
+      "volume": 48000.0,
+      "turnover": 2414400000.0
+    },
+    {
+      "timestamp": 1763809899802,
+      "timeFormatted": "7m",
+      "price": {
+        "open": 50300.0,
+        "high": 50450.0,
+        "low": 50250.0,
+        "close": 50350.0
+      },
+      "openInterest": {
+        "open": 1003000.0,
+        "high": 1004500.0,
+        "low": 1002500.0,
+        "close": 1003500.0
+      },
+      "volume": 50000.0,
+      "turnover": 2517500000.0
+    },
+    {
+      "timestamp": 1763809959802,
+      "timeFormatted": "8m",
+      "price": {
+        "open": 50350.0,
+        "high": 50500.0,
+        "low": 50300.0,
+        "close": 50400.0
+      },
+      "openInterest": {
+        "open": 1003500.0,
+        "high": 1005000.0,
+        "low": 1003000.0,
+        "close": 1004000.0
+      },
+      "volume": 47000.0,
+      "turnover": 2368800000.0
+    },
+    {
+      "timestamp": 1763810019802,
+      "timeFormatted": "9m",
+      "price": {
+        "open": 50400.0,
+        "high": 50550.0,
+        "low": 50350.0,
+        "close": 50450.0
+      },
+      "openInterest": {
+        "open": 1004000.0,
+        "high": 1005500.0,
+        "low": 1003500.0,
+        "close": 1004500.0
+      },
+      "volume": 44000.0,
+      "turnover": 2219800000.0
+    }
+  ],
+  "statistics": {
+    "totalCandles": 10,
+    "priceStart": 50000.0,
+    "priceEnd": 50450.0,
+    "priceChangePercent": 0.9,
+    "oiStart": 1000000.0,
+    "oiEnd": 1004500.0,
+    "oiChangePercent": 0.45,
+    "avgVolume": 42500.0,
+    "maxVolume": 50000.0,
+    "minVolume": 35000.0,
+    "volatilityPercent": 1.2
+  }
+}
