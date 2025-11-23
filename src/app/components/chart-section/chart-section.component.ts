@@ -22,7 +22,7 @@ export class ChartSection {
     chartType: 'candlestick',
     toolbar: true,
     zoom: true,
-    volume: false,
+    volume: true,
     navigator: false,
     rangeButtons: true,
     statusBar: true,
@@ -31,6 +31,7 @@ export class ChartSection {
     highKey: 'high',
     lowKey: 'low',
     closeKey: 'close',
+    volumeKey: 'volume',
     width: undefined,
     height: undefined,
     theme: {
