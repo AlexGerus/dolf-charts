@@ -30,8 +30,7 @@ export class ScenarioService {
 
           // Optimize candles if there are too many
           const optimizedData: ScenarioData = {
-            ...data,
-            candles: this.optimizeCandles(data.candles)
+            ...data
           };
 
           resolve(optimizedData);

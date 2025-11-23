@@ -5,21 +5,11 @@ import { FileUploaderComponent } from './components/file-uploader/file-uploader.
 import { ScenarioCardComponent } from './components/scenario-card/scenario-card.component';
 import { ScenarioService } from './services/scenario.service';
 import { ScenarioData } from './models/scenario.model';
-import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
-import { Chart } from 'chart.js';
-import { CandlestickController, CandlestickElement } from 'chartjs-chart-financial';
-import zoomPlugin from 'chartjs-plugin-zoom';
-import 'chartjs-adapter-date-fns';
-import 'hammerjs';
-
-// Register financial chart and zoom plugins
-Chart.register(CandlestickController, CandlestickElement, zoomPlugin);
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, FileUploaderComponent, ScenarioCardComponent],
-  providers: [provideCharts(withDefaultRegisterables())],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

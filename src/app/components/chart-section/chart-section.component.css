@@ -4,125 +4,6 @@
   gap: 1.5rem;
 }
 
-/* Control Instructions */
-.control-instructions {
-  background: rgba(0, 255, 136, 0.1);
-  border: 1px solid rgba(0, 255, 136, 0.3);
-  border-radius: 0.75rem;
-  padding: 1rem 1.5rem;
-  margin-bottom: 0.5rem;
-  animation: slideIn 0.3s ease-out;
-}
-
-.instructions-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  color: #00ff88;
-}
-
-.instructions-row > svg {
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-}
-
-.instructions-content {
-  flex: 1;
-  display: flex;
-  gap: 1.5rem;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  flex-wrap: wrap;
-}
-
-.instruction-item {
-  display: inline-block;
-}
-
-.instruction-item strong {
-  color: #00dd77;
-}
-
-.reset-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(0, 255, 136, 0.15);
-  border: 1px solid rgba(0, 255, 136, 0.4);
-  color: #00ff88;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.875rem;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.reset-button:hover {
-  background: rgba(0, 255, 136, 0.25);
-  border-color: #00ff88;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 255, 136, 0.3);
-}
-
-.reset-button svg {
-  width: 18px;
-  height: 18px;
-}
-
-.reset-button.measurement-active {
-  background: rgba(0, 255, 136, 0.3);
-  border-color: #00ff88;
-  box-shadow: 0 0 12px rgba(0, 255, 136, 0.4);
-}
-
-/* Zoom Controls */
-.zoom-controls {
-  display: flex;
-  gap: 0.25rem;
-  align-items: center;
-}
-
-.zoom-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  background: rgba(0, 255, 136, 0.15);
-  border: 1px solid rgba(0, 255, 136, 0.4);
-  color: #00ff88;
-  padding: 0;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.zoom-button:hover {
-  background: rgba(0, 255, 136, 0.25);
-  border-color: #00ff88;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 255, 136, 0.3);
-}
-
-.zoom-button svg {
-  width: 18px;
-  height: 18px;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Chart Wrapper */
 .chart-wrapper {
   background: rgba(30, 30, 46, 0.6);
@@ -159,55 +40,30 @@
 /* Chart Canvas */
 .chart-canvas {
   position: relative;
-  height: 350px;
+  height: 500px;
   width: 100%;
-  cursor: crosshair;
 }
 
-.chart-canvas.measurement-mode {
-  cursor: cell;
+/* AG Charts specific styles */
+.chart-canvas ag-financial-charts {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.chart-canvas canvas {
-  border-radius: 0.5rem;
+.chart-canvas ::ng-deep .ag-chart-wrapper {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .control-instructions {
-    padding: 0.875rem 1rem;
-  }
-
-  .instructions-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  .instructions-content {
-    flex-direction: column;
-    gap: 0.5rem;
-    font-size: 0.75rem;
-  }
-
-  .reset-button {
-    width: 100%;
-    justify-content: center;
-    font-size: 0.75rem;
-    padding: 0.625rem 0.875rem;
-  }
-
-  .reset-button svg {
-    width: 16px;
-    height: 16px;
-  }
-
   .chart-wrapper {
     padding: 1rem;
   }
 
   .chart-canvas {
-    height: 250px;
+    height: 350px;
   }
 
   .chart-title {
@@ -222,126 +78,6 @@
 
 @media (max-width: 480px) {
   .chart-canvas {
-    height: 220px;
+    height: 300px;
   }
-
-  .control-instructions {
-    padding: 0.75rem 0.875rem;
-    font-size: 0.7rem;
-  }
-
-  .instruction-item {
-    font-size: 0.7rem;
-  }
-}
-
-/* Measurement Tool Styles */
-.measurement-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 100;
-}
-
-.measurement-line-svg {
-  stroke: #00ff88;
-  stroke-width: 2;
-  stroke-dasharray: 5, 5;
-  fill: none;
-}
-
-.measurement-point {
-  fill: #00ff88;
-  stroke: rgba(0, 0, 0, 0.9);
-  stroke-width: 2;
-}
-
-.measurement-results {
-  background: rgba(0, 255, 136, 0.1);
-  border: 2px solid rgba(0, 255, 136, 0.4);
-  border-radius: 0.75rem;
-  padding: 1rem 1.5rem;
-  margin-bottom: 1rem;
-  animation: slideIn 0.3s ease-out;
-}
-
-.measurement-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #00ff88;
-  margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.measurement-icon {
-  width: 18px;
-  height: 18px;
-}
-
-.measurement-stats {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.measurement-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.stat-label {
-  font-size: 0.75rem;
-  color: #888;
-  font-weight: 500;
-}
-
-.stat-value {
-  font-size: 1rem;
-  color: #e0e0e0;
-  font-weight: 700;
-}
-
-.stat-value.positive {
-  color: #00ff88;
-}
-
-.stat-value.negative {
-  color: #ff4444;
-}
-
-.measurement-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.measurement-line {
-  position: absolute;
-  background: rgba(0, 255, 136, 0.3);
-  border: 1px dashed #00ff88;
-}
-
-.measurement-label {
-  position: absolute;
-  background: rgba(0, 0, 0, 0.9);
-  color: #00ff88;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.375rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border: 1px solid #00ff88;
-  white-space: nowrap;
-  pointer-events: none;
 }

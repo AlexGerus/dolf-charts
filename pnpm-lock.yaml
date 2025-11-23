@@ -23,27 +23,15 @@ dependencies:
   '@angular/router':
     specifier: ^21.0.0
     version: 21.0.0(@angular/common@21.0.0)(@angular/core@21.0.0)(@angular/platform-browser@21.0.0)(rxjs@7.8.2)
-  chart.js:
-    specifier: ^4.5.1
-    version: 4.5.1
-  chartjs-adapter-date-fns:
-    specifier: ^3.0.0
-    version: 3.0.0(chart.js@4.5.1)(date-fns@4.1.0)
-  chartjs-chart-financial:
-    specifier: ^0.2.1
-    version: 0.2.1(chart.js@4.5.1)
-  chartjs-plugin-zoom:
-    specifier: ^2.2.0
-    version: 2.2.0(chart.js@4.5.1)
+  ag-charts-angular:
+    specifier: ^12.3.1
+    version: 12.3.1(@angular/common@21.0.0)(@angular/core@21.0.0)
+  ag-charts-enterprise:
+    specifier: ^12.3.1
+    version: 12.3.1
   date-fns:
     specifier: ^4.1.0
     version: 4.1.0
-  hammerjs:
-    specifier: ^2.0.8
-    version: 2.0.8
-  ng2-charts:
-    specifier: ^8.0.0
-    version: 8.0.0(@angular/cdk@21.0.0)(@angular/common@21.0.0)(@angular/core@21.0.0)(@angular/platform-browser@21.0.0)(chart.js@4.5.1)(rxjs@7.8.2)
   rxjs:
     specifier: ~7.8.0
     version: 7.8.2
@@ -362,20 +350,6 @@ packages:
       - tsx
       - yaml
     dev: true
-
-  /@angular/cdk@21.0.0(@angular/common@21.0.0)(@angular/core@21.0.0)(rxjs@7.8.2):
-    resolution: {integrity: sha512-wCr5D3mEC+p69IMDC7vf8bWx18mfUNNRdsiK3XD0m1PqfeNfnCJb+Bnkks37MC/SU01uCNrAokRaTbWL6pk1Wg==}
-    peerDependencies:
-      '@angular/common': ^21.0.0 || ^22.0.0
-      '@angular/core': ^21.0.0 || ^22.0.0
-      rxjs: ^6.5.3 || ^7.4.0
-    dependencies:
-      '@angular/common': 21.0.0(@angular/core@21.0.0)(rxjs@7.8.2)
-      '@angular/core': 21.0.0(@angular/compiler@21.0.0)(rxjs@7.8.2)
-      parse5: 8.0.0
-      rxjs: 7.8.2
-      tslib: 2.8.1
-    dev: false
 
   /@angular/cli@21.0.0:
     resolution: {integrity: sha512-713DfTD/ThIy/BOmZ+8zhXo/OhPE9jYaAS0UhXVhtp2ptqzRqSzLvW9fWgtqP4ITAqulOoitiWPLXxOEQ2Cixw==}
@@ -1527,10 +1501,6 @@ packages:
       '@jridgewell/sourcemap-codec': 1.5.5
     dev: true
 
-  /@kurkle/color@0.3.4:
-    resolution: {integrity: sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==}
-    dev: false
-
   /@listr2/prompt-adapter-inquirer@3.0.5(@inquirer/prompts@7.9.0)(listr2@9.0.5):
     resolution: {integrity: sha512-WELs+hj6xcilkloBXYf9XXK8tYEnKsgLj01Xl5ONUJpKjmT5hGVUzNUS5tooUxs7pGMrw+jFD/41WpqW4V3LDA==}
     engines: {node: '>=20.0.0'}
@@ -2526,10 +2496,6 @@ packages:
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
     dev: true
 
-  /@types/hammerjs@2.0.46:
-    resolution: {integrity: sha512-ynRvcq6wvqexJ9brDMS4BnBLzmr0e14d6ZJTEShTBWKymQiHwlAyGu0ZPEFI2Fh1U53F7tN9ufClWM5KvqkKOw==}
-    dev: false
-
   /@vitejs/plugin-basic-ssl@2.1.0(vite@7.2.2):
     resolution: {integrity: sha512-dOxxrhgyDIEUADhb/8OlV9JIqYLgos03YorAueTIeOUskLJSEsfwCByjbu98ctXitUN3znXKp0bYD/WHSudCeA==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
@@ -2615,6 +2581,47 @@ packages:
       mime-types: 3.0.2
       negotiator: 1.0.0
     dev: true
+
+  /ag-charts-angular@12.3.1(@angular/common@21.0.0)(@angular/core@21.0.0):
+    resolution: {integrity: sha512-yyjfxEQkalap2pj2AahSpMRbelOrumqu+ZqvgsjipkAN5GJ/Jj32B9i+xEHLPqrFuTRsS1E6jXwIi3V+tuXIHg==}
+    peerDependencies:
+      '@angular/common': '>= 17.0.0'
+      '@angular/core': '>= 17.0.0'
+    dependencies:
+      '@angular/common': 21.0.0(@angular/core@21.0.0)(rxjs@7.8.2)
+      '@angular/core': 21.0.0(@angular/compiler@21.0.0)(rxjs@7.8.2)
+      ag-charts-community: 12.3.1
+      tslib: 2.8.1
+    dev: false
+
+  /ag-charts-community@12.3.1:
+    resolution: {integrity: sha512-uRaUFmCl8e0Y3KxjaHUYlkCPS5OtwtfTChkdpoZuBKDXqerCPTjPu+uvlun3rYUSYxScwVf2LZCI0Hfw4Vc+WQ==}
+    dependencies:
+      ag-charts-core: 12.3.1
+      ag-charts-locale: 12.3.1
+      ag-charts-types: 12.3.1
+    dev: false
+
+  /ag-charts-core@12.3.1:
+    resolution: {integrity: sha512-711UJ0fXengb8+4PEW4nlzWDowmbYymPcjW2eJWHRzzvttUf14hnh+wP/l/s3EGVgYkEHe9vkXFwmeOJUlkC0Q==}
+    dependencies:
+      ag-charts-types: 12.3.1
+    dev: false
+
+  /ag-charts-enterprise@12.3.1:
+    resolution: {integrity: sha512-2sQIwLfksRTcI4JVRjgQkyGq6z68UVTO/I91HKmtpukrQLsW/o0TzzHmgTtVJOXd9yO9gx2KWa2DMg0+FKdXEQ==}
+    dependencies:
+      ag-charts-community: 12.3.1
+      ag-charts-core: 12.3.1
+    dev: false
+
+  /ag-charts-locale@12.3.1:
+    resolution: {integrity: sha512-dCn7oHh3xLI576FT514aBedNQgtb5zwh/Gcj7jHvjOWYRnfH8kaekZzLzntITA6dF6E78okJfoI7CUCbYduQ4Q==}
+    dev: false
+
+  /ag-charts-types@12.3.1:
+    resolution: {integrity: sha512-5216xYoawnvMXDFI6kTpPku+mH0Csiwu/FE7lsAm8Z22HEN6ciSG/V7g+IrpLWncELqksgENebCTP75PZ3CsHA==}
+    dev: false
 
   /agent-base@7.1.4:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
@@ -2881,41 +2888,6 @@ packages:
   /chardet@2.1.1:
     resolution: {integrity: sha512-PsezH1rqdV9VvyNhxxOW32/d75r01NY7TQCmOqomRo15ZSOKbpTFVsfjghxo6JloQUCGnH4k1LGu0R4yCLlWQQ==}
     dev: true
-
-  /chart.js@4.5.1:
-    resolution: {integrity: sha512-GIjfiT9dbmHRiYi6Nl2yFCq7kkwdkp1W/lp2J99rX0yo9tgJGn3lKQATztIjb5tVtevcBtIdICNWqlq5+E8/Pw==}
-    engines: {pnpm: '>=8'}
-    dependencies:
-      '@kurkle/color': 0.3.4
-    dev: false
-
-  /chartjs-adapter-date-fns@3.0.0(chart.js@4.5.1)(date-fns@4.1.0):
-    resolution: {integrity: sha512-Rs3iEB3Q5pJ973J93OBTpnP7qoGwvq3nUnoMdtxO+9aoJof7UFcRbWcIDteXuYd1fgAvct/32T9qaLyLuZVwCg==}
-    peerDependencies:
-      chart.js: '>=2.8.0'
-      date-fns: '>=2.0.0'
-    dependencies:
-      chart.js: 4.5.1
-      date-fns: 4.1.0
-    dev: false
-
-  /chartjs-chart-financial@0.2.1(chart.js@4.5.1):
-    resolution: {integrity: sha512-RI3zrszyf2YdW7ME8I5XDsicy6YaU+uA1XZmGddR3rdcQlGf4pSgGFK8O0PWPO5Szdc8wZ8qpns++yib6pWBaw==}
-    peerDependencies:
-      chart.js: ^4.0.0
-    dependencies:
-      chart.js: 4.5.1
-    dev: false
-
-  /chartjs-plugin-zoom@2.2.0(chart.js@4.5.1):
-    resolution: {integrity: sha512-in6kcdiTlP6npIVLMd4zXZ08PDUXC52gZ4FAy5oyjk1zX3gKarXMAof7B9eFiisf9WOC3bh2saHg+J5WtLXZeA==}
-    peerDependencies:
-      chart.js: '>=3.2.0'
-    dependencies:
-      '@types/hammerjs': 2.0.46
-      chart.js: 4.5.1
-      hammerjs: 2.0.8
-    dev: false
 
   /chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
@@ -3210,6 +3182,7 @@ packages:
   /entities@6.0.1:
     resolution: {integrity: sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==}
     engines: {node: '>=0.12'}
+    dev: true
 
   /env-paths@2.2.1:
     resolution: {integrity: sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==}
@@ -3574,11 +3547,6 @@ packages:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
     dev: true
 
-  /hammerjs@2.0.8:
-    resolution: {integrity: sha512-tSQXBXS/MWQOn/RKckawJ61vvsDpCom87JgxiYdGwHdOa0ht0vzUWDlfioofFCRU0L+6NGDt6XzbgoJvZkMeRQ==}
-    engines: {node: '>=0.8.0'}
-    dev: false
-
   /has-symbols@1.1.0:
     resolution: {integrity: sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ==}
     engines: {node: '>= 0.4'}
@@ -3914,10 +3882,6 @@ packages:
     dev: true
     optional: true
 
-  /lodash-es@4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-    dev: false
-
   /log-symbols@7.0.1:
     resolution: {integrity: sha512-ja1E3yCr9i/0hmBVaM0bfwDjnGy8I/s6PP4DFp+yP+a+mrHO4Rm7DtmnqROTUkHIkqffC84YY7AeqX6oFk0WFg==}
     engines: {node: '>=18'}
@@ -4157,26 +4121,6 @@ packages:
     resolution: {integrity: sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg==}
     engines: {node: '>= 0.6'}
     dev: true
-
-  /ng2-charts@8.0.0(@angular/cdk@21.0.0)(@angular/common@21.0.0)(@angular/core@21.0.0)(@angular/platform-browser@21.0.0)(chart.js@4.5.1)(rxjs@7.8.2):
-    resolution: {integrity: sha512-nofsNHI2Zt+EAwT+BJBVg0kgOhNo9ukO4CxULlaIi7VwZSr7I1km38kWSoU41Oq6os6qqIh5srnL+CcV+RFPFA==}
-    peerDependencies:
-      '@angular/cdk': '>=19.0.0'
-      '@angular/common': '>=19.0.0'
-      '@angular/core': '>=19.0.0'
-      '@angular/platform-browser': '>=19.0.0'
-      chart.js: ^3.4.0 || ^4.0.0
-      rxjs: ^6.5.3 || ^7.4.0
-    dependencies:
-      '@angular/cdk': 21.0.0(@angular/common@21.0.0)(@angular/core@21.0.0)(rxjs@7.8.2)
-      '@angular/common': 21.0.0(@angular/core@21.0.0)(rxjs@7.8.2)
-      '@angular/core': 21.0.0(@angular/compiler@21.0.0)(rxjs@7.8.2)
-      '@angular/platform-browser': 21.0.0(@angular/common@21.0.0)(@angular/core@21.0.0)
-      chart.js: 4.5.1
-      lodash-es: 4.17.21
-      rxjs: 7.8.2
-      tslib: 2.8.1
-    dev: false
 
   /node-addon-api@6.1.0:
     resolution: {integrity: sha512-+eawOlIgy680F0kBzPUNFhMZGtJ1YmqM6l4+Crf4IkImjYrO/mqPwRMh352g23uIaQKFItcQ64I7KMaJxHgAVA==}
@@ -4419,6 +4363,7 @@ packages:
     resolution: {integrity: sha512-9m4m5GSgXjL4AjumKzq1Fgfp3Z8rsvjRNbnkVwfu2ImRqE5D0LnY2QfDen18FSY9C573YU5XxSapdHZTZ2WolA==}
     dependencies:
       entities: 6.0.1
+    dev: true
 
   /parseurl@1.3.3:
     resolution: {integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==}
