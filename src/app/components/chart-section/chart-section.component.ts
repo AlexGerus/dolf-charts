@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgFinancialCharts } from 'ag-charts-angular';
 import type { AgFinancialChartOptions } from 'ag-charts-enterprise';
@@ -13,8 +13,8 @@ import { Candle } from '../../models/scenario.model';
   styleUrls: ['./chart-section.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChartSectionComponent implements OnChanges {
-  @Input() candles: Candle[] = [];
+export class ChartSection {
+  readonly candles = input.required<Candle[]>();
 
   // Chart options for Price Chart
   public priceChartOptions: AgFinancialChartOptions = {
@@ -82,15 +82,16 @@ export class ChartSectionComponent implements OnChanges {
     }
   };
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['candles'] && this.candles) {
+  constructor() {
+    // Use effect() instead of ngOnChanges
+    effect(() => {
       this.updateCharts();
-    }
+    });
   }
 
   private updateCharts(): void {
     // Prepare data for Price Chart
-    const priceData = this.candles.map((candle) => ({
+    const priceData = this.candles().map((candle) => ({
       date: new Date(candle.timestamp),
       open: candle.price.open,
       high: candle.price.high,
@@ -100,7 +101,7 @@ export class ChartSectionComponent implements OnChanges {
     }));
 
     // Prepare data for Open Interest Chart
-    const oiData = this.candles.map((candle) => ({
+    const oiData = this.candles().map((candle) => ({
       date: new Date(candle.timestamp),
       open: candle.openInterest.open,
       high: candle.openInterest.high,

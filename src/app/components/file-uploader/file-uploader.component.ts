@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, output, signal, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScenarioService } from '../../services/scenario.service';
 import { ScenarioData } from '../../models/scenario.model';
@@ -11,31 +11,33 @@ import { ScenarioData } from '../../models/scenario.model';
   styleUrls: ['./file-uploader.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileUploaderComponent {
-  @Output() filesUploaded = new EventEmitter<ScenarioData[]>();
+export class FileUploader {
+  filesUploaded = output<ScenarioData[]>();
 
-  isDragging = false;
-  isLoading = false;
-  errorMessage = '';
+  // Use signals for reactive state
+  readonly isDragging = signal(false);
+  readonly isLoading = signal(false);
+  readonly errorMessage = signal('');
 
-  constructor(private scenarioService: ScenarioService) {}
+  // Inject service
+  private readonly scenarioService = inject(ScenarioService);
 
   onDragOver(event: DragEvent): void {
     event.preventDefault();
     event.stopPropagation();
-    this.isDragging = true;
+    this.isDragging.set(true);
   }
 
   onDragLeave(event: DragEvent): void {
     event.preventDefault();
     event.stopPropagation();
-    this.isDragging = false;
+    this.isDragging.set(false);
   }
 
   onDrop(event: DragEvent): void {
     event.preventDefault();
     event.stopPropagation();
-    this.isDragging = false;
+    this.isDragging.set(false);
 
     const files = event.dataTransfer?.files;
     if (files) {
@@ -52,22 +54,22 @@ export class FileUploaderComponent {
   }
 
   async handleFiles(files: FileList): Promise<void> {
-    this.errorMessage = '';
+    this.errorMessage.set('');
 
     // Check file count
     if (files.length > 6) {
-      this.errorMessage = 'Maximum 6 files can be uploaded at once';
+      this.errorMessage.set('Maximum 6 files can be uploaded at once');
       return;
     }
 
     // Check current scenarios count
     const currentCount = this.scenarioService.getScenariosCount();
     if (currentCount + files.length > 6) {
-      this.errorMessage = `Can only upload ${6 - currentCount} more scenario(s). Maximum is 6 total.`;
+      this.errorMessage.set(`Can only upload ${6 - currentCount} more scenario(s). Maximum is 6 total.`);
       return;
     }
 
-    this.isLoading = true;
+    this.isLoading.set(true);
 
     try {
       const scenarios: ScenarioData[] = [];
@@ -97,13 +99,13 @@ export class FileUploaderComponent {
 
       this.filesUploaded.emit(scenarios);
     } catch (error: any) {
-      this.errorMessage = error.message || 'Failed to upload files';
+      this.errorMessage.set(error.message || 'Failed to upload files');
     } finally {
-      this.isLoading = false;
+      this.isLoading.set(false);
     }
   }
 
   clearError(): void {
-    this.errorMessage = '';
+    this.errorMessage.set('');
   }
 }

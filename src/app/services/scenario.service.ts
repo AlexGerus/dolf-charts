@@ -1,15 +1,12 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 import { ScenarioData, Candle } from '../models/scenario.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScenarioService {
-  private scenariosSubject = new BehaviorSubject<ScenarioData[]>([]);
-  public scenarios$: Observable<ScenarioData[]> = this.scenariosSubject.asObservable();
-
-  constructor() {}
+  // Use signal instead of BehaviorSubject
+  readonly scenarios = signal<ScenarioData[]>([]);
 
   /**
    * Parse scenario file from uploaded JSON
@@ -73,11 +70,7 @@ export class ScenarioService {
 
     // Validate statistics
     const stats = data.statistics;
-    if (typeof stats.totalCandles !== 'number' || typeof stats.priceStart !== 'number' || typeof stats.priceEnd !== 'number') {
-      return false;
-    }
-
-    return true;
+    return !(typeof stats.totalCandles !== 'number' || typeof stats.priceStart !== 'number' || typeof stats.priceEnd !== 'number');
   }
 
   /**
@@ -100,43 +93,36 @@ export class ScenarioService {
    * Add scenario to the list
    */
   addScenario(scenario: ScenarioData): void {
-    const currentScenarios = this.scenariosSubject.value;
+    const currentScenarios = this.scenarios();
 
     // Limit to 6 scenarios
     if (currentScenarios.length >= 6) {
       throw new Error('Maximum of 6 scenarios allowed. Please remove one first.');
     }
 
-    this.scenariosSubject.next([...currentScenarios, scenario]);
+    this.scenarios.set([...currentScenarios, scenario]);
   }
 
   /**
    * Remove scenario from the list
    */
   removeScenario(index: number): void {
-    const currentScenarios = this.scenariosSubject.value;
+    const currentScenarios = this.scenarios();
     const updatedScenarios = currentScenarios.filter((_, i) => i !== index);
-    this.scenariosSubject.next(updatedScenarios);
+    this.scenarios.set(updatedScenarios);
   }
 
   /**
    * Clear all scenarios
    */
   clearAllScenarios(): void {
-    this.scenariosSubject.next([]);
+    this.scenarios.set([]);
   }
 
   /**
    * Get current scenarios count
    */
   getScenariosCount(): number {
-    return this.scenariosSubject.value.length;
-  }
-
-  /**
-   * Get scenarios array
-   */
-  getScenarios(): ScenarioData[] {
-    return this.scenariosSubject.value;
+    return this.scenarios().length;
   }
 }

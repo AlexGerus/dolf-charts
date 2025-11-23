@@ -1,56 +1,56 @@
 <div class="stats-grid">
   <div class="stat-card">
     <div class="stat-label">Total Candles</div>
-    <div class="stat-value text-primary">{{ statistics.totalCandles }}</div>
+    <div class="stat-value text-primary">{{ statistics().totalCandles }}</div>
   </div>
 
   <div class="stat-card">
     <div class="stat-label">Price Change</div>
     <div class="stat-value" [ngClass]="getStatColor('price')">
-      {{ statistics.priceChangePercent | percentageFormat }}
+      {{ statistics().priceChangePercent | percentageFormat }}
     </div>
     <div class="stat-detail">
-      ${{ statistics.priceStart | number:'1.2-2' }} → ${{ statistics.priceEnd | number:'1.2-2' }}
+      ${{ statistics().priceStart | number:'1.2-2' }} → ${{ statistics().priceEnd | number:'1.2-2' }}
     </div>
   </div>
 
   <div class="stat-card">
     <div class="stat-label">OI Change</div>
     <div class="stat-value" [ngClass]="getStatColor('oi')">
-      {{ statistics.oiChangePercent | percentageFormat }}
+      {{ statistics().oiChangePercent | percentageFormat }}
     </div>
     <div class="stat-detail">
-      {{ statistics.oiStart | numberFormat }} → {{ statistics.oiEnd | numberFormat }}
+      {{ statistics().oiStart | numberFormat }} → {{ statistics().oiEnd | numberFormat }}
     </div>
   </div>
 
   <div class="stat-card">
     <div class="stat-label">OI/Price Ratio</div>
     <div class="stat-value" [ngClass]="getStatColor('ratio')">
-      {{ getOiPriceRatio() | number:'1.2-2' }}x
+      {{ oiPriceRatio() | number:'1.2-2' }}x
     </div>
     <div class="stat-detail">
-      {{ getOiPriceRatio() >= 2.0 ? 'Strong correlation' : 'Weak correlation' }}
+      {{ oiPriceRatio() >= 2.0 ? 'Strong correlation' : 'Weak correlation' }}
     </div>
   </div>
 
   <div class="stat-card">
     <div class="stat-label">Volatility</div>
     <div class="stat-value" [ngClass]="getStatColor('volatility')">
-      {{ statistics.volatilityPercent | percentageFormat:2 }}
+      {{ statistics().volatilityPercent | percentageFormat:2 }}
     </div>
     <div class="stat-detail">
-      {{ statistics.volatilityPercent < 2.5 ? 'Low volatility' : 'High volatility' }}
+      {{ statistics().volatilityPercent < 2.5 ? 'Low volatility' : 'High volatility' }}
     </div>
   </div>
 
   <div class="stat-card">
     <div class="stat-label">Average Volume</div>
     <div class="stat-value text-warning">
-      {{ statistics.avgVolume | numberFormat }}
+      {{ statistics().avgVolume | numberFormat }}
     </div>
     <div class="stat-detail">
-      Min: {{ statistics.minVolume | numberFormat }} | Max: {{ statistics.maxVolume | numberFormat }}
+      Min: {{ statistics().minVolume | numberFormat }} | Max: {{ statistics().maxVolume | numberFormat }}
     </div>
   </div>
 </div>

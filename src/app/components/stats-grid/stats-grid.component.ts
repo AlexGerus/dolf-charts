@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Statistics } from '../../models/scenario.model';
 import { NumberFormatPipe } from '../../pipes/number-format.pipe';
@@ -12,30 +12,34 @@ import { PercentageFormatPipe } from '../../pipes/percentage-format.pipe';
   styleUrls: ['./stats-grid.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StatsGridComponent {
-  @Input() statistics!: Statistics;
+export class StatsGrid {
+  // Use input() instead of @Input()
+  readonly statistics = input.required<Statistics>();
 
-  getOiPriceRatio(): number {
-    if (!this.statistics || this.statistics.priceEnd === 0) {
+  // Use computed signal for OI/Price ratio
+  readonly oiPriceRatio = computed(() => {
+    const stats = this.statistics();
+    if (!stats || stats.priceEnd === 0) {
       return 0;
     }
-    return Math.abs(this.statistics.oiChangePercent / this.statistics.priceChangePercent);
-  }
+    return Math.abs(stats.oiChangePercent / stats.priceChangePercent);
+  });
 
   getStatColor(type: 'price' | 'oi' | 'ratio' | 'volatility'): string {
-    if (!this.statistics) {
+    const stats = this.statistics();
+    if (!stats) {
       return 'text-gray-400';
     }
 
     switch (type) {
       case 'price':
-        return this.statistics.priceChangePercent >= 0 ? 'text-primary' : 'text-danger';
+        return stats.priceChangePercent >= 0 ? 'text-primary' : 'text-danger';
       case 'oi':
-        return this.statistics.oiChangePercent >= 0 ? 'text-primary' : 'text-danger';
+        return stats.oiChangePercent >= 0 ? 'text-primary' : 'text-danger';
       case 'ratio':
-        return this.getOiPriceRatio() >= 2.0 ? 'text-primary' : 'text-danger';
+        return this.oiPriceRatio() >= 2.0 ? 'text-primary' : 'text-danger';
       case 'volatility':
-        return this.statistics.volatilityPercent < 2.5 ? 'text-primary' : 'text-danger';
+        return stats.volatilityPercent < 2.5 ? 'text-primary' : 'text-danger';
       default:
         return 'text-gray-400';
     }

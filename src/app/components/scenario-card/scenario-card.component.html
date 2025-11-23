@@ -1,13 +1,13 @@
 <div class="scenario-card animate-slideUp">
   <div class="scenario-header">
     <div class="scenario-info">
-      <h2 class="scenario-title">{{ scenarioData.scenario }}</h2>
-      <p class="scenario-description">{{ scenarioData.description }}</p>
+      <h2 class="scenario-title">{{ scenarioData().scenario }}</h2>
+      <p class="scenario-description">{{ scenarioData().description }}</p>
       <div class="scenario-symbol">
         <svg class="symbol-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <span>{{ scenarioData.symbol }}</span>
+        <span>{{ scenarioData().symbol }}</span>
       </div>
     </div>
     <button class="remove-button" (click)="onRemove()" title="Remove scenario">
@@ -18,7 +18,7 @@
   </div>
 
   <div class="scenario-content">
-    <app-stats-grid [statistics]="scenarioData.statistics"></app-stats-grid>
-    <app-chart-section [candles]="scenarioData.candles"></app-chart-section>
+    <app-stats-grid [statistics]="scenarioData().statistics" />
+    <app-chart-section [candles]="scenarioData().candles" />
   </div>
 </div>

@@ -1,36 +1,24 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Subject, takeUntil } from 'rxjs';
-import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
-import { ScenarioCardComponent } from './components/scenario-card/scenario-card.component';
+import { FileUploader } from './components/file-uploader/file-uploader.component';
+import { ScenarioCard } from './components/scenario-card/scenario-card.component';
 import { ScenarioService } from './services/scenario.service';
 import { ScenarioData } from './models/scenario.model';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FileUploaderComponent, ScenarioCardComponent],
+  imports: [CommonModule, FileUploader, ScenarioCard],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements OnInit, OnDestroy {
-  scenarios: ScenarioData[] = [];
-  private destroy$ = new Subject<void>();
+export class App {
+  // Inject service using inject() function
+  readonly scenarioService = inject(ScenarioService);
 
-  constructor(public scenarioService: ScenarioService) {}
-
-  ngOnInit(): void {
-    this.scenarioService.scenarios$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(scenarios => {
-        this.scenarios = scenarios;
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+  // Use computed signal for scenarios
+  readonly scenarios = this.scenarioService.scenarios;
+  readonly scenariosCount = computed(() => this.scenarios().length);
 
   onFilesUploaded(scenarios: ScenarioData[]): void {
     // Files are already added to the service in the FileUploaderComponent
@@ -43,9 +31,5 @@ export class App implements OnInit, OnDestroy {
 
   clearAllScenarios(): void {
     this.scenarioService.clearAllScenarios();
-  }
-
-  getScenariosCount(): number {
-    return this.scenarios.length;
   }
 }
